@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 15:30:43 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/13 16:47:38 by hiennguy         ###   ########.fr       */
+/*   Created: 2025/05/13 16:26:12 by hiennguy          #+#    #+#             */
+/*   Updated: 2025/05/13 16:45:09 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+int	init_program(int argc, char **argv, t_program *program)
 {
-	t_program program;
-	if (validate_argc(argc) == FAIL)
-		return (FAIL);
-	if (validate_input(argc, argv))
-		return (FAIL);
-	if (init_program(argc, argv, &program) == FAIL)
-		return (FAIL);
 
-
-	return (SUCCESS);
 }
-
-

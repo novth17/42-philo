@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:10:25 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/13 16:17:48 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:01:45 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,7 @@ int	validate_input(int argc, char **argv)
 			ft_putstr_fd("Error: Invalid argument\n", 2);
 			return (FAIL);
 		}
-		if (num <= 0 || num > INT_MAX)
-		{
-			ft_putstr_fd("Error: Number out of range (1 to INT_MAX)\n", 2);
-			return (FAIL);
-		}
+		i++;
 	}
 	return (SUCCESS);
 }
