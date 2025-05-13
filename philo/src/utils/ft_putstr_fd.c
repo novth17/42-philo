@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 15:30:43 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/13 16:08:03 by hiennguy         ###   ########.fr       */
+/*   Created: 2025/05/13 14:13:31 by hiennguy          #+#    #+#             */
+/*   Updated: 2025/05/13 14:26:38 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include <unistd.h>
 
-int	main(int argc, char **argv)
+static void	ft_putchar_fd(char c, int fd)
 {
-	if (validate_argc(argc) == FAIL)
-		return (FAIL);
-	if (validate_input(argc, argv))
-		return (FAIL);
-
-
-
-	return (SUCCESS);
+	write(fd, &c, 1);
 }
 
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
 
+	if (s == NULL)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}
