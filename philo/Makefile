@@ -10,6 +10,8 @@ HEADERS		= inc/philo.h
 
 SRC 		= 	main.c \
 				validation.c \
+				init.c \
+				delete.c \
 				utils/ft_putstr_fd.c \
 				utils/ft_atoi_philo.c \
 
