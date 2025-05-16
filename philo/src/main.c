@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:30:43 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/14 18:08:52 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:31:29 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	print_program(t_program *program)
 {
 	printf("Number of philosophers: %d\n", program->num_philos);
-	printf("Time to die: %d ms\n", program->time_to_die);
-	printf("Time to eat: %d ms\n", program->time_to_eat);
-	printf("Time to sleep: %d ms\n", program->time_to_sleep);
+	printf("Time to die: %zu ms\n", program->time_die);
+	printf("Time to eat: %zu ms\n", program->time_eat);
+	printf("Time to sleep: %zu ms\n", program->time_sleep);
 	if (program->meals_required == -1)
 		printf("Meals required: (not set)\n");
 	else
@@ -35,6 +35,7 @@ int	main(int argc, char **argv)
 	if (init(argc, argv, &program) == FAIL)
 		return (FAIL);
 	print_program(&program);
+	delete_program(&program);
 	return (SUCCESS);
 }
 
