@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:30:43 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/16 17:31:29 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:29:03 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	main(int argc, char **argv)
 		return (FAIL);
 	if (validate_input(argc, argv))
 		return (FAIL);
-	if (init(argc, argv, &program) == FAIL)
+	if (init_program(argc, argv, &program) == FAIL)
+		return (FAIL);
+	if (simulate(&program) == FAIL)
 		return (FAIL);
 	print_program(&program);
 	delete_program(&program);

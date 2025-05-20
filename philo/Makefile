@@ -12,13 +12,15 @@ SRC 		= 	main.c \
 				validation.c \
 				init.c \
 				delete.c \
+				simu.c \
+				routine/routine.c \
+				routine/action.c \
 				utils/ft_putstr_fd.c \
 				utils/ft_atoi_philo.c \
+				utils/print.c
 
 
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-
-all:	$(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
 	@mkdir -p $(dir $@)
@@ -27,6 +29,8 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
 $(NAME): $(OBJS) $(HEADERS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "\033[0;32mPhilo built successfully ✅\033[0m"
+	
+all: $(NAME)
 
 clean:
 	@rm -rf $(OBJ_DIR)

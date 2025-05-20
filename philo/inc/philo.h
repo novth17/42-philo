@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:30:47 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/16 16:48:05 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:09:28 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,41 +17,56 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <unistd.h>
+# include <stdatomic.h>
 
 typedef struct s_program
 {
-	int				num_philos;
-	size_t			time_die;
-	size_t			time_eat;
-	size_t			time_sleep;
-	int			meals_required;
-	pthread_mutex_t	*mtx_forks;
-	struct s_philo	*philos;
+	int					num_philos;
+	size_t				time_die;
+	size_t				time_eat;
+	size_t				time_sleep;
+	size_t				time_start;
+	int					meals_required;
+	atomic_int			stop_sim; //a philo die, or everyone eaten, other fail
+	//a shared flag used by all thread whetheer program should end
+	pthread_mutex_t		*mtx_forks;
+	pthread_mutex_t		mtx_print; //Locking access to the printing section
+	pthread_mutex_t		mtx_meal;
+	pthread_mutex_t		mtx_stop;
+	struct s_philo		*philos;
 }	t_program;
 
 // allocate an array based on ammount of philo
-//
 
 typedef struct s_philo
 {
-	int					philo_id;
+	t_program			*program;
+	int					id;
 	pthread_t			thread;
 	pthread_mutex_t		*fork[2];
-	//last meal time
-	//meals eaten
+	size_t				time_last_meal; // time of lastmeal
+	int					meals_eaten; //how many meals eaten
+
+
 }	t_philo;
 
 //utils
 void	ft_putstr_fd(char *s, int fd);
 int		ft_atoi_philo(const char *str);
+size_t	get_time(void);
+int		ft_print(t_philo *philo, const char *message);
 
-//functions
+//validate
 int		validate_argc(int argc);
 int		validate_input(int argc, char **argv);
 int		is_valid_number(const char *str);
-int		init(int argc, char **argv, t_program *program);
 
+//functions
+int		init_program(int argc, char **argv, t_program *program);
+int		simulate(t_program *program);
+void	*routine(void *arg);
 
 //free
-void	free_partial_forks(t_program *program, int created);
+void	destroy_partial_forks(t_program *program, int created);
 void	delete_program(t_program *program);
+void	destroy_forks(t_program *program);

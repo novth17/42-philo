@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:10:25 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/14 15:59:05 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:27:30 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_valid_number(const char *str)
 	result = 0;
 	if (!str || !str[0])
 		return (0);
-	if (*str == '+' || *str == '-' || *str < '0' || *str > '9')
+	if (*str == '+' || *str == '-')
 		return (0);
 	while (*str >= '0' && *str <= '9')
 	{
@@ -33,7 +33,6 @@ int	is_valid_number(const char *str)
 		return (0);
 	return (1);
 }
-
 
 int	validate_argc(int argc)
 {
