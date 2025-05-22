@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:45:15 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/22 18:25:31 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:02:06 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_take_fork(t_philo *philo)
 	if (philo->program->num_philos == 1)
 	{
 		pthread_mutex_unlock(philo->fork[0]);
-		//should it die and stop sim here???
+
 		return (FAIL);
 	}
 	pthread_mutex_lock(philo->fork[1]);
@@ -61,14 +61,15 @@ static int	ft_eat(t_philo *philo)
 {
 	t_program *program = philo->program;
 
-	if (ft_print(philo, "is eating") == FAIL)
-		return (FAIL); 
+
 
 	pthread_mutex_lock(&program->mtx_meal);
 	philo->time_last_meal = get_time();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&program->mtx_meal);
 
+	if (ft_print(philo, "is eating") == FAIL)
+		return (FAIL);
 	safe_usleep(philo, program->time_eat);
 
 	pthread_mutex_unlock(philo->fork[0]);

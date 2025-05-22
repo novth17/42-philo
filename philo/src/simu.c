@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:35:10 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/22 18:03:05 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:55:10 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	simulate(t_program *program)
 		delete_program(program);
 		return (FAIL);
 	}
+
 	if (join_threads(program) == FAIL)
 	{
 		delete_program(program);
@@ -49,8 +50,8 @@ static int	create_threads(t_program *program)
 {
 	int	i;
 
-	i = 0;
 	program->time_start = get_time();
+	i = 0;
 	while (i < program->num_philos)
 	{
 		if (pthread_create(&program->philos[i].thread, NULL, &routine,

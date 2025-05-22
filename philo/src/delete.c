@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:22:58 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/19 20:48:50 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:31:53 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,3 @@ void	destroy_partial_forks(t_program *program, int created)
 	free(program->mtx_forks);
 	program->mtx_forks = NULL;
 }
-
-
-

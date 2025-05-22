@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:24:56 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/22 17:59:55 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:03:53 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,36 @@ void	*monitor(void *arg)
 			now = get_time();
 			if (now - program->philos[i].time_last_meal > program->time_die)
 			{
-				ft_print(program->philos, "is dead");
+				ft_print(&program->philos[i], "is dead");
 				pthread_mutex_lock(&program->mtx_stop);
 				program->stop_sim = 1;
 				pthread_mutex_unlock(&program->mtx_stop);
 
 				pthread_mutex_unlock(&program->mtx_meal);
-				return (NULL); // EXIT ERALY WHEN A PHILO DIE
+				return (NULL); // EXIT EARLY WHEN A PHILO DIES
 			}
 
-			if (program->philos[i].meals_eaten >= program->meals_required)
-					full_philo_count++;
+			if (program->meals_required != -1 &&
+				program->philos[i].meals_eaten >= program->meals_required)
+			{
+				full_philo_count++;
+			}
 			pthread_mutex_unlock(&program->mtx_meal);
 			i++;
 		}
-		if (program->meals_required != -1 && full_philo_count == program->num_philos)
+		if (program->meals_required != -1 &&
+			full_philo_count == program->num_philos)
 		{
 			pthread_mutex_lock(&program->mtx_stop);
 			program->stop_sim = 1;
 			pthread_mutex_unlock(&program->mtx_stop);
 			break;
 		}
-		usleep(1000);
+
 	}
 	return (NULL);
 }
+
 
 int	monitor_threads(t_program *program)
 {
@@ -74,5 +79,11 @@ int	monitor_threads(t_program *program)
 		ft_putstr_fd("Monitor thread creation failed!\n", 2);
 		return (FAIL);
 	}
+	if (pthread_join(monitor_thread, NULL) != 0)
+	{
+		ft_putstr_fd("Monitor thread join failed!\n", 2);
+		return (FAIL);
+	}
 	return (SUCCESS);
 }
+
