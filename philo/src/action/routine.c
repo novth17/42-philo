@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:45:15 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/20 21:18:05 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:25:31 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,6 @@
 - sleep
 - repeat unless someone dies or eats enough
  */
-static int	safe_usleep(t_philo *philo, size_t mls)
-{
-	size_t	start;
-
-	start = get_time();
-	while (get_time() - start < mls)
-	{
-		if (philo && philo->program->stop_sim == 1)
-			break;
-		usleep(1000);
-	}
-	return (SUCCESS);
-}
 
 static int	ft_sleep(t_philo *philo)
 {
@@ -75,21 +62,20 @@ static int	ft_eat(t_philo *philo)
 	t_program *program = philo->program;
 
 	if (ft_print(philo, "is eating") == FAIL)
-		return (FAIL);
+		return (FAIL); 
 
 	pthread_mutex_lock(&program->mtx_meal);
 	philo->time_last_meal = get_time();
+	philo->meals_eaten++;
 	pthread_mutex_unlock(&program->mtx_meal);
 
-	//The philosopher is actively eating, and we simulate the duration of
-	//eating by making the thread sleep.
 	safe_usleep(philo, program->time_eat);
-	philo->meals_eaten++;
+
 	pthread_mutex_unlock(philo->fork[0]);
 	pthread_mutex_unlock(philo->fork[1]);
 	return (SUCCESS);
-
 }
+
 /*
 This line casts the void * argument passed to the thread function into
 a t_philo * pointer, so that the thread can access the philosopher’s data.
@@ -100,8 +86,11 @@ void	*routine(void *arg)
 	//delay time eat /2
 
 	if (philo->id % 2 == 0)
+	{
+		ft_think(philo);
 		safe_usleep(philo, philo->program->time_eat / 2);
-	while (1)
+	}
+		while (1)
 	{
 		if (ft_take_fork(philo) == FAIL)
 			break;
@@ -111,7 +100,7 @@ void	*routine(void *arg)
 			break;
 		if (ft_think(philo) == FAIL)
 			break;
-		if (philo->program->stop_sim == 1)
+		if (is_dead(philo))
 			break;
 	}
 	printf("Philo %d meals: %d\n", philo->id, philo->meals_eaten);

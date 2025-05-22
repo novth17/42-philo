@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:30:47 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/20 21:09:28 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:23:45 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,22 @@ void	ft_putstr_fd(char *s, int fd);
 int		ft_atoi_philo(const char *str);
 size_t	get_time(void);
 int		ft_print(t_philo *philo, const char *message);
+int		safe_usleep(t_philo *philo, size_t mls);
+int		is_dead(t_philo *philo);
 
 //validate
 int		validate_argc(int argc);
 int		validate_input(int argc, char **argv);
 int		is_valid_number(const char *str);
 
+
 //functions
 int		init_program(int argc, char **argv, t_program *program);
 int		simulate(t_program *program);
 void	*routine(void *arg);
+void	*monitor(void *arg);
+int		monitor_threads(t_program *program);
+
 
 //free
 void	destroy_partial_forks(t_program *program, int created);
