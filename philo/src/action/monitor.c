@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:24:56 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/22 19:03:53 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:44:24 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*monitor(void *arg)
 {
 	t_program	*program = (t_program *)arg;
 	int			i;
-	size_t		now;
+	long		now;
 	int			full_philo_count;
 
 	while (1)
@@ -39,7 +39,7 @@ void	*monitor(void *arg)
 			now = get_time();
 			if (now - program->philos[i].time_last_meal > program->time_die)
 			{
-				ft_print(&program->philos[i], "is dead");
+				ft_print(&program->philos[i], "died");
 				pthread_mutex_lock(&program->mtx_stop);
 				program->stop_sim = 1;
 				pthread_mutex_unlock(&program->mtx_stop);
@@ -56,8 +56,7 @@ void	*monitor(void *arg)
 			pthread_mutex_unlock(&program->mtx_meal);
 			i++;
 		}
-		if (program->meals_required != -1 &&
-			full_philo_count == program->num_philos)
+		if (program->meals_required != -1 && full_philo_count == program->num_philos)
 		{
 			pthread_mutex_lock(&program->mtx_stop);
 			program->stop_sim = 1;

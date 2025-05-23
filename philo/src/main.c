@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:30:43 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/19 21:29:03 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:58:54 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	print_program(t_program *program)
 {
+	pthread_mutex_lock(&program->mtx_print);
 	printf("Number of philosophers: %d\n", program->num_philos);
 	printf("Time to die: %zu ms\n", program->time_die);
 	printf("Time to eat: %zu ms\n", program->time_eat);
@@ -22,6 +23,7 @@ void	print_program(t_program *program)
 		printf("Meals required: (not set)\n");
 	else
 		printf("Meals required: %d\n", program->meals_required);
+	pthread_mutex_unlock(&program->mtx_print);
 }
 
 

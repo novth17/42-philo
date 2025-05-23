@@ -1,6 +1,6 @@
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wextra -Wall -Werror
+CFLAGS		= -Wextra -Wall -Werror -pthread -O3
 
 OBJ_DIR		= obj/
 SRC_DIR		= src

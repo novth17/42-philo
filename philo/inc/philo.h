@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:30:47 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/22 18:23:45 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:56:48 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_putstr_fd(char *s, int fd);
 int		ft_atoi_philo(const char *str);
 size_t	get_time(void);
 int		ft_print(t_philo *philo, const char *message);
-int		safe_usleep(t_philo *philo, size_t mls);
+void	safe_usleep(t_philo *philo, size_t mls);
 int		is_dead(t_philo *philo);
 
 //validate

@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:26:12 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/20 21:15:17 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:26:21 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	init_program(int argc, char **argv, t_program *program)
 		program->meals_required = ft_atoi_philo(argv[5]);
 	else
 		program->meals_required = -1;
-	program->time_start = 0;
+	program->time_start = get_time();// + 3;
 	program->stop_sim = 0;
 	if (init_forks(program) == FAIL)
 		return (FAIL);
@@ -92,7 +92,7 @@ static int	init_philos(t_program *program)
 		program->philos[i].fork[0] = &program->mtx_forks[i];
 		program->philos[i].fork[1] = &program->mtx_forks[(i + 1) % program->num_philos];
 		program->philos[i].meals_eaten = 0;
-		program->philos[i].time_last_meal = 0;
+		program->philos[i].time_last_meal = program->time_start;
 		program->philos[i].program = program;
 		i++;
 	}

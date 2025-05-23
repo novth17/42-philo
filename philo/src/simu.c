@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:35:10 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/22 18:55:10 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:50:37 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	create_threads(t_program *program)
 {
 	int	i;
 
-	program->time_start = get_time();
 	i = 0;
 	while (i < program->num_philos)
 	{

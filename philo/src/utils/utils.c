@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 18:26:19 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/22 18:29:21 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:52:02 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	is_dead(t_philo *philo)
 	return (0);
 }
 
-int	safe_usleep(t_philo *philo, size_t mls)
+void	safe_usleep(t_philo *philo, size_t mls)
 {
 	size_t	start;
 
@@ -68,5 +68,4 @@ int	safe_usleep(t_philo *philo, size_t mls)
 			break;
 		usleep(1000);
 	}
-	return (SUCCESS);
 }
