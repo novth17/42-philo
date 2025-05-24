@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:30:43 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/23 14:58:54 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:48:09 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	print_program(t_program *program)
 	pthread_mutex_unlock(&program->mtx_print);
 }
 
-
 int	main(int argc, char **argv)
 {
 	t_program	program;
+
 	if (validate_argc(argc) == FAIL)
 		return (FAIL);
 	if (validate_input(argc, argv))
@@ -42,5 +42,3 @@ int	main(int argc, char **argv)
 	delete_program(&program);
 	return (SUCCESS);
 }
-
-

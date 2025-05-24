@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:22:58 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/22 18:31:53 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:47:20 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 void		destroy_forks(t_program *program);
 static void	free_philos(t_program *program);
 
-
 void	delete_program(t_program *program)
 {
 	if (!program)
-		return;
+		return ;
 	destroy_forks(program);
 	pthread_mutex_destroy(&program->mtx_print);
 	pthread_mutex_destroy(&program->mtx_meal);
@@ -30,8 +29,9 @@ void	delete_program(t_program *program)
 
 void	destroy_forks(t_program *program)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	if (program->mtx_forks)
 	{
 		while (i < program->num_philos)

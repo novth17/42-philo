@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 18:26:19 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/23 16:52:02 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:46:47 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	safe_usleep(t_philo *philo, size_t mls)
 	while (get_time() - start < mls)
 	{
 		if (philo && philo->program->stop_sim == 1)
-			break;
+			break ;
 		usleep(1000);
 	}
 }

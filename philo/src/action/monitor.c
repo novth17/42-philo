@@ -6,83 +6,89 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:24:56 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/23 16:44:24 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 20:41:44 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-// What monitor_thread() should do:
-	// Loop forever (or until someone dies)
-	// For each philosopher:
-	// Lock mtx_meals
-	// Check time since last_meal
-	// If too much time passed → log death and set stop_sim
-	// Unlock mtx_meals
-	// Sleep a little to avoid eating your CPU
+static int	someone_is_dead(t_program *program);
+static int	kill_philo(t_program *program, int i, long now);
+static int	check_all_full(t_program *program);
+static void	stop_simulation(t_program *program);
 
 void	*monitor(void *arg)
 {
-	t_program	*program = (t_program *)arg;
-	int			i;
-	long		now;
-	int			full_philo_count;
+	t_program	*program;
 
+	program = (t_program *)arg;
 	while (1)
 	{
-		i = 0;
-		full_philo_count = 0;
-		while (i < program->num_philos)
+		if (someone_is_dead(program))
+			return (NULL);
+		if (program->meals_required != -1 && check_all_full(program))
 		{
-			pthread_mutex_lock(&program->mtx_meal);
-			now = get_time();
-			if (now - program->philos[i].time_last_meal > program->time_die)
-			{
-				ft_print(&program->philos[i], "died");
-				pthread_mutex_lock(&program->mtx_stop);
-				program->stop_sim = 1;
-				pthread_mutex_unlock(&program->mtx_stop);
-
-				pthread_mutex_unlock(&program->mtx_meal);
-				return (NULL); // EXIT EARLY WHEN A PHILO DIES
-			}
-
-			if (program->meals_required != -1 &&
-				program->philos[i].meals_eaten >= program->meals_required)
-			{
-				full_philo_count++;
-			}
-			pthread_mutex_unlock(&program->mtx_meal);
-			i++;
+			stop_simulation(program);
+			break ;
 		}
-		if (program->meals_required != -1 && full_philo_count == program->num_philos)
-		{
-			pthread_mutex_lock(&program->mtx_stop);
-			program->stop_sim = 1;
-			pthread_mutex_unlock(&program->mtx_stop);
-			break;
-		}
-
 	}
+	usleep(100);
 	return (NULL);
 }
 
-
-int	monitor_threads(t_program *program)
+static int	someone_is_dead(t_program *program)
 {
-	pthread_t monitor_thread;
+	int		i;
+	long	now;
 
-	if (pthread_create(&monitor_thread, NULL, &monitor, program) != 0)
+	i = 0;
+	while (i < program->num_philos)
 	{
-		ft_putstr_fd("Monitor thread creation failed!\n", 2);
-		return (FAIL);
+		pthread_mutex_lock(&program->mtx_meal);
+		now = get_time();
+		if (kill_philo(program, i, now))
+		{
+			pthread_mutex_unlock(&program->mtx_meal);
+			return (1);
+		}
+		pthread_mutex_unlock(&program->mtx_meal);
+		i++;
 	}
-	if (pthread_join(monitor_thread, NULL) != 0)
-	{
-		ft_putstr_fd("Monitor thread join failed!\n", 2);
-		return (FAIL);
-	}
-	return (SUCCESS);
+	return (0);
 }
 
+static int	kill_philo(t_program *program, int i, long now)
+{
+	if (now - program->philos[i].time_last_meal > program->time_die)
+	{
+		ft_print(&program->philos[i], "died");
+		stop_simulation(program);
+		return (1);
+	}
+	return (0);
+}
+
+static int	check_all_full(t_program *program)
+{
+	int	i;
+	int	full_philo_count;
+
+	full_philo_count = 0;
+	i = 0;
+	while (i < program->num_philos)
+	{
+		pthread_mutex_lock(&program->mtx_meal);
+		if (program->philos[i].meals_eaten >= program->meals_required)
+			full_philo_count++;
+		pthread_mutex_unlock(&program->mtx_meal);
+		i++;
+	}
+	return (full_philo_count == program->num_philos);
+}
+
+static void	stop_simulation(t_program *program)
+{
+	pthread_mutex_lock(&program->mtx_stop);
+	program->stop_sim = 1;
+	pthread_mutex_unlock(&program->mtx_stop);
+}
