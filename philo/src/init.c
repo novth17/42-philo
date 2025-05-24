@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:26:12 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 20:35:41 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:53:27 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,82 +75,44 @@ static int	init_mtx(t_program *program)
 	return (SUCCESS);
 }
 
+static void	assign_forks(t_program *program, t_philo *philo, int i)
+{
+	int	left = i;
+	int	right = (i + 1) % program->num_philos;
+
+	if (i % 2 == 0)
+	{
+		philo->fork[0] = &program->mtx_forks[left];
+		philo->fork[1] = &program->mtx_forks[right];
+	}
+	else
+	{
+		philo->fork[1] = &program->mtx_forks[left];
+		philo->fork[0] = &program->mtx_forks[right];
+	}
+}
+
 static int	init_philos(t_program *program)
 {
 	int	i;
 
-	i = 0;
 	program->philos = malloc(sizeof(t_philo) * program->num_philos);
 	if (!program->philos)
 	{
-		ft_putstr_fd("malloc failed", 2);
+		ft_putstr_fd("malloc failed\n", 2);
 		return (FAIL);
 	}
+	i = 0;
 	while (i < program->num_philos)
 	{
-		program->philos[i].id = i + 1;
-		if (i % 2 == 0)
-		{
-			program->philos[i].fork[0] = &program->mtx_forks[i];
-			program->philos[i].fork[1] = &program->mtx_forks[(i + 1)
-				% program->num_philos];
-		}
-		else
-		{
-			program->philos[i].fork[1] = &program->mtx_forks[i];
-			program->philos[i].fork[0] = &program->mtx_forks[(i + 1)
-				% program->num_philos];
-		}
-		program->philos[i].meals_eaten = 0;
-		program->philos[i].time_last_meal = program->time_start;
-		program->philos[i].program = program;
+		t_philo *philo = &program->philos[i];
+		philo->id = i + 1;
+		assign_forks(program, philo, i);
+		philo->meals_eaten = 0;
+		philo->time_last_meal = program->time_start;
+		philo->program = program;
 		i++;
 	}
 	return (SUCCESS);
 }
-
-// static int	init_philos(t_program *program)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	program->philos = malloc(sizeof(t_philo) * program->num_philos);
-// 	if (!program->philos)
-// 	{
-// 		ft_putstr_fd("malloc failed", 2);
-// 		return (FAIL);
-// 	}
-// 	while (i < program->num_philos)
-// 	{
-// 		program->philos[i].id = i + 1;
-// 		if (i % 2 == 0)
-// 		{
-// 			program->philos[i].fork[0] = &program->mtx_forks[i];
-// 			program->philos[i].fork[1] = &program->mtx_forks[(i + 1)
-// 				% program->num_philos];
-// 		}
-// 		else
-// 		{
-// 			program->philos[i].fork[1] = &program->mtx_forks[i];
-// 			program->philos[i].fork[0] = &program->mtx_forks[(i + 1)
-// 				% program->num_philos];
-// 		}
-// 		program->philos[i].meals_eaten = 0;
-// 		program->philos[i].time_last_meal = program->time_start;
-// 		program->philos[i].program = program;
-// 		i++;
-// 	}
-// 	return (SUCCESS);
-// }
-
-// static int	assign_forks(t_program *program)
-// {
-// 	program->philos = malloc(sizeof(t_philo) * program->num_philos);
-// 	if (!program->philos)
-// 	{
-// 		ft_putstr_fd("malloc failed", 2);
-// 		return (FAIL);
-// 	}
-// 	return (SUCCESS);
-// }
 

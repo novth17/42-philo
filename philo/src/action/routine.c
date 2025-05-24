@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:45:15 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 21:21:53 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:32:29 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ void	*routine(void *arg)
 	}
 	while (1)
 	{
-		// if (philo->id % 2 == 0 && first_round-- <= 0 && ft_think(philo) == FAIL)
-		// 	break ;
 		if (ft_take_fork(philo) == FAIL)
 			break ;
 		if (ft_eat(philo) == FAIL)
