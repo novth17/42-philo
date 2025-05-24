@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:45:15 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 17:19:27 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:21:53 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ static int	ft_eat(t_philo *philo)
 	}
 	pthread_mutex_lock(&program->mtx_meal);
 	philo->time_last_meal = get_time();
-	philo->meals_eaten++;
 	pthread_mutex_unlock(&program->mtx_meal);
 	safe_usleep(philo, program->time_eat);
+	philo->meals_eaten++;
 	pthread_mutex_unlock(philo->fork[0]);
 	pthread_mutex_unlock(philo->fork[1]);
 	return (SUCCESS);
@@ -99,8 +99,8 @@ void	*routine(void *arg)
 	}
 	while (1)
 	{
-		if (philo->id % 2 == 0 && first_round-- <= 0 && ft_think(philo) == FAIL)
-			break ;
+		// if (philo->id % 2 == 0 && first_round-- <= 0 && ft_think(philo) == FAIL)
+		// 	break ;
 		if (ft_take_fork(philo) == FAIL)
 			break ;
 		if (ft_eat(philo) == FAIL)

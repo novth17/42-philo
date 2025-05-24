@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:30:47 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 17:06:33 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 20:57:21 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_philo
 	pthread_t			thread;
 	pthread_mutex_t		*fork[2];
 	size_t				time_last_meal;
-	int					meals_eaten;
+	atomic_int			meals_eaten;
 }	t_philo;
 
 void	ft_putstr_fd(char *s, int fd);
