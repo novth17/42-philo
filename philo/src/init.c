@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:26:12 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 21:53:27 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:16:07 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,11 @@ static int	init_mtx(t_program *program)
 
 static void	assign_forks(t_program *program, t_philo *philo, int i)
 {
-	int	left = i;
-	int	right = (i + 1) % program->num_philos;
+	int	left;
+	int	right;
 
+	left = i;
+	right = (i + 1) % program->num_philos;
 	if (i % 2 == 0)
 	{
 		philo->fork[0] = &program->mtx_forks[left];
@@ -94,7 +96,8 @@ static void	assign_forks(t_program *program, t_philo *philo, int i)
 
 static int	init_philos(t_program *program)
 {
-	int	i;
+	int		i;
+	t_philo	*philo;
 
 	program->philos = malloc(sizeof(t_philo) * program->num_philos);
 	if (!program->philos)
@@ -105,7 +108,7 @@ static int	init_philos(t_program *program)
 	i = 0;
 	while (i < program->num_philos)
 	{
-		t_philo *philo = &program->philos[i];
+		philo = &program->philos[i];
 		philo->id = i + 1;
 		assign_forks(program, philo, i);
 		philo->meals_eaten = 0;
@@ -115,4 +118,3 @@ static int	init_philos(t_program *program)
 	}
 	return (SUCCESS);
 }
-

@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:24:56 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 20:41:44 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:14:47 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	*monitor(void *arg)
 
 static int	someone_is_dead(t_program *program)
 {
-	int		i;
-	long	now;
+	int			i;
+	long long	now;
 
 	i = 0;
 	while (i < program->num_philos)

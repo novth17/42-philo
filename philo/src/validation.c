@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:10:25 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 16:22:42 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:15:29 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	validate_argc(int argc)
 	if (argc != 5 && argc != 6)
 	{
 		ft_putstr_fd("Invalid argument count: must provide 4 or 5 arguments.\n",
-				2);
+			2);
 		return (FAIL);
 	}
 	return (SUCCESS);

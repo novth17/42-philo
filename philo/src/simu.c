@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:35:10 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 14:48:38 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:17:59 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	simulate(t_program *program)
 		delete_program(program);
 		return (FAIL);
 	}
-	/*This waits for all philosopher threads (and maybe the monitor) to finish.
-		Main thread pauses here until all others are done.*/
 	if (monitor_threads(program) == FAIL)
 	{
 		delete_program(program);
@@ -98,4 +96,3 @@ static int	join_threads(t_program *program)
 	}
 	return (SUCCESS);
 }
-
