@@ -6,15 +6,16 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:26:12 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 22:16:07 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:28:06 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static int	init_forks(t_program *program);
-static int	init_philos(t_program *program);
 static int	init_mtx(t_program *program);
+static int	init_philos(t_program *program);
+static void	assign_forks(t_program *program, t_philo *philo, int i);
 
 int	init_program(int argc, char **argv, t_program *program)
 {
@@ -75,25 +76,6 @@ static int	init_mtx(t_program *program)
 	return (SUCCESS);
 }
 
-static void	assign_forks(t_program *program, t_philo *philo, int i)
-{
-	int	left;
-	int	right;
-
-	left = i;
-	right = (i + 1) % program->num_philos;
-	if (i % 2 == 0)
-	{
-		philo->fork[0] = &program->mtx_forks[left];
-		philo->fork[1] = &program->mtx_forks[right];
-	}
-	else
-	{
-		philo->fork[1] = &program->mtx_forks[left];
-		philo->fork[0] = &program->mtx_forks[right];
-	}
-}
-
 static int	init_philos(t_program *program)
 {
 	int		i;
@@ -117,4 +99,23 @@ static int	init_philos(t_program *program)
 		i++;
 	}
 	return (SUCCESS);
+}
+
+static void	assign_forks(t_program *program, t_philo *philo, int i)
+{
+	int	left;
+	int	right;
+
+	left = i;
+	right = (i + 1) % program->num_philos;
+	if (i % 2 == 0)
+	{
+		philo->fork[0] = &program->mtx_forks[left];
+		philo->fork[1] = &program->mtx_forks[right];
+	}
+	else
+	{
+		philo->fork[1] = &program->mtx_forks[left];
+		philo->fork[0] = &program->mtx_forks[right];
+	}
 }
