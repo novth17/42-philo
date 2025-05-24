@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:45:15 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 22:25:41 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/24 23:14:11 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,7 @@ static int	ft_think(t_philo *philo)
 {
 	if (ft_print(philo, "is thinking") == FAIL)
 		return (FAIL);
+	if (philo->program->num_philos % 2 != 0)
+		safe_usleep(philo, philo->program->time_eat);
 	return (SUCCESS);
 }
