@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:45:15 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 23:14:11 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:29:31 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ static int	ft_take_fork(t_philo *philo);
 static int	ft_eat(t_philo *philo);
 static int	ft_sleep(t_philo *philo);
 static int	ft_think(t_philo *philo);
-
-/*
-This line casts the void * argument passed to the thread function into
-a t_philo * pointer, so that the thread can access the philosopher’s data.
-*/
 
 void	*routine(void *arg)
 {

@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:35:10 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 22:17:59 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:29:58 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 static int	create_threads(t_program *program);
 static int	join_threads(t_program *program);
 static int	monitor_threads(t_program *program);
-
-/*
-Create all philosopher threads.
-Create the monitor thread.
-Join all philosopher threads.
-Join the monitor thread.
-Clean up memory, destroy mutexes, etc.
-Exit main.
-*/
 
 int	simulate(t_program *program)
 {
