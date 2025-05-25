@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:26:12 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 22:28:06 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/25 22:54:00 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static int	init_forks(t_program *program)
 	i = 0;
 	program->mtx_forks = malloc(sizeof(pthread_mutex_t) * program->num_philos);
 	if (!program->mtx_forks)
+	{
+		ft_putstr_fd("malloc failed\n", 2);
 		return (FAIL);
+	}
 	while (i < program->num_philos)
 	{
 		if (pthread_mutex_init(&program->mtx_forks[i], NULL) != 0)

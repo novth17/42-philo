@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:24:56 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 22:14:47 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/25 20:04:34 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ static int	kill_philo(t_program *program, int i, long now)
 {
 	if (now - program->philos[i].time_last_meal > program->time_die)
 	{
-		ft_print(&program->philos[i], "died");
-		stop_simulation(program);
+		pthread_mutex_lock(&program->mtx_print);
+		printf("%zu %d %s\n", get_time() - program->time_start,
+			program->philos[i].id, "died");
+		program->stop_sim = 1;
+		pthread_mutex_unlock(&program->mtx_print);
 		return (1);
 	}
 	return (0);

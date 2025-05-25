@@ -6,7 +6,7 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 21:17:41 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 22:20:42 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/25 22:32:37 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ int	ft_print(t_philo *philo, const char *message)
 		pthread_mutex_unlock(&philo->program->mtx_print);
 		return (FAIL);
 	}
-	printf("%zu %d %s\n",
-		get_time() - philo->program->time_start,
-		philo->id,
+	printf("%zu %d %s\n", get_time() - philo->program->time_start, philo->id,
 		message);
 	pthread_mutex_unlock(&philo->program->mtx_print);
 	return (SUCCESS);

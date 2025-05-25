@@ -6,17 +6,12 @@
 /*   By: hiennguy <hiennguy@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 18:26:19 by hiennguy          #+#    #+#             */
-/*   Updated: 2025/05/24 14:46:47 by hiennguy         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:16:10 by hiennguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <limits.h>
-
-static void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -26,10 +21,8 @@ void	ft_putstr_fd(char *s, int fd)
 		return ;
 	i = 0;
 	while (s[i])
-	{
-		ft_putchar_fd(s[i], fd);
 		i++;
-	}
+	write(fd, s, i);
 }
 
 int	ft_atoi_philo(const char *str)
